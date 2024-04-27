@@ -1,5 +1,4 @@
 const axios = require('axios');
-require('dotenv').config();
 const hospitalRequest = require('./hospitalRequest');
 
 const APIKEY = process.env.API_KEY;

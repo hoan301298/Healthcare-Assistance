@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const UserDetail = require('../model/UserDetail');
+const SECRET_KEY = process.env.SECRET_KEY;
 
 const loginComponent = async (req, res) => {
-  const SECRET_KEY = 'XXX';
+  
   const { username, password } = req.body;
   try {
     const user = await UserDetail.findOne({ username: username });

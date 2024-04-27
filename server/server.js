@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const chatComponent = require('./components/chatbox/chatComponent');
 const db_connection = require('./components/mongo/db_connect');
+require('dotenv').config();
 const PORT = 5000;
 
 const app = express();
