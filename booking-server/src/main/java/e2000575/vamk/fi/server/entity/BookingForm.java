@@ -1,9 +1,9 @@
 package e2000575.vamk.fi.server.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -24,11 +24,9 @@ public class BookingForm {
     private String username;
     private String patientName;
     private String email;
-    private List<Hospital> hospital;
+    private Hospital hospital;
     private String phone;
     private String date;
     private String time;
-
-    @CreatedDate
-    private LocalDate createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 }

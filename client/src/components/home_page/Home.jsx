@@ -1,6 +1,5 @@
 const Home = () => {
     const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
-    console.log(isAuthenticated)
     return (
         <div>
             <h1>This is Home page</h1>

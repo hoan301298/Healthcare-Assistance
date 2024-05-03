@@ -14,7 +14,7 @@ const Navbar = () => {
             <div className='site-pages'>
                 <ul>
                     <CustomLink to="/">Home</CustomLink>
-                    <CustomLink to="/map">Nearby Hospital</CustomLink>
+                    <a href='/map'>Search</a>
                     <CustomLink to="/appointment">Appointment</CustomLink>
                     <CustomLink to="/contact">Contact</CustomLink>
                 </ul>

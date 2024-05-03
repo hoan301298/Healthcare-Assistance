@@ -16,8 +16,6 @@ const Login = ({ updateToken }) => {
     setAlertMessage(null);
   }
   
-  console.log(alertMessage);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.post('/login', { username, password})
@@ -44,7 +42,7 @@ const Login = ({ updateToken }) => {
 
     <div className='login'>
       {isAuthenticated? (
-        window.location.href = localStorage.getItem('backToPage')
+        window.location.href = (localStorage.getItem('backToPage') || '/account')
         ) : (
         <div>
           {alertMessage != null && (<p className='alert-message'>{alertMessage}</p>)}

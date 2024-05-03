@@ -16,18 +16,6 @@ const Booking = () => {
     const username = localStorage.getItem('username');
     const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
 
-    // useEffect(() => {
-    //     if(selectedHospital.information !== undefined) {
-    //         setHospital({
-    //             id: selectedHospital.information.place_id,
-    //             name: selectedHospital.name,
-    //             address: selectedHospital.information.details.formatted_address,
-    //             phone: selectedHospital.information.details.formatted_phone_number,
-    //             website: selectedHospital.information.details.website
-    //         })    
-    //     }
-    // }, [selectedHospital]);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setHospital({
@@ -37,19 +25,21 @@ const Booking = () => {
             phone: selectedHospital.information.details.formatted_phone_number,
             website: selectedHospital.information.details.website
         })
+        
+        const bookingForm = {
+            username: username,
+            patientName: patientName,
+            email: email,
+            hospital: hospital,
+            phone: phoneNumber,
+            date: Date,
+            time: Time,
+        }
         try {
-            const response = await axios.post(`http://localhost:8080/booking-form/create/${username}`, {
-                username,
-                patientName,
-                email,
-                hospital,
-                phoneNumber,
-                Date,
-                Time
-            });
+            const response = await axios.post(`http://localhost:8080/booking-form/create/${username}`, bookingForm);
             console.log('Booking created:', response.data);
             setData(JSON.stringify(response.data));
-            localStorage.setItem('selectedHospital', null);
+            // localStorage.setItem('selectedHospital', null);
             // Optionally, add logic to redirect or show success message
         } catch (error) {
             console.error('Error creating booking:', error);

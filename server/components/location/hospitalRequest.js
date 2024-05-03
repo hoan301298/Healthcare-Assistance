@@ -47,12 +47,11 @@ const detailRequest = async (APIKEY, place_id) => {
     try{
         const response = await axios.get(detailsURL, {
             params: {
-                key: APIKey,
+                key: APIKEY,
                 place_id: place_id,
                 fields: 'name,formatted_address,formatted_phone_number,website,opening_hours'
             }
         })
-        console.log(response.data)
         return response.data;
     } catch (error) {
         console.error('Error fetching details: ', error);

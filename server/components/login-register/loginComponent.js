@@ -18,7 +18,6 @@ const loginComponent = async (req, res) => {
         }
   
         const token = jwt.sign({ id: user.id, username: user.username }, SECRET_KEY);
-        console.log(token);
         res.json({ token, username });  
       });
     }

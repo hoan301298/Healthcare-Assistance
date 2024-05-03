@@ -13,11 +13,11 @@ const HospitalList = ({ hospitals }) => {
             const alertMessage = "Please Login to reserve your appointment!";
             RedirectToLoginPage({ pathname: '/appointment', alertMessage});
         }
-    } 
+    }
     
     return (
         <div>
-        <h3>Hospitals Near Your Location:</h3>
+        <h3>Hospitals Near Your Location: (Within 3 kilometers)</h3><br />
         <ul>
             {hospitals.map((hospital, index) => (
             <li key={index}>
@@ -26,14 +26,15 @@ const HospitalList = ({ hospitals }) => {
                 Phone Number: {hospital.information.details.formatted_phone_number} <br />
                 <a href={hospital.information.details.website}>Visit Website</a> <br />
                 Distance: {hospital.information.distance/1000}km <br />
-                <h4>Opening Hours:</h4>
-                
                     {hospital.information.details.opening_hours && hospital.information.details.opening_hours.weekday_text && (
-                        <ul>
-                            {hospital.information.details.opening_hours.weekday_text.map(text => (
-                            <li>{text}</li>
-                            ))}
-                        </ul>
+                        <div>
+                            <h4>Opening Hours:</h4>
+                            <ul>
+                                {hospital.information.details.opening_hours.weekday_text.map(text => (
+                                <li>{text}</li>
+                                ))}
+                            </ul>
+                        </div>
                     )}    
                 <button onClick={() => handleHospitalButtonClick(hospital)}>Book Appointment</button>
                 <p>-----------------------------------------------------------------------------</p>

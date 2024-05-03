@@ -1,27 +1,29 @@
 import React, { useState } from 'react';
 
-const ChatFooter = ({ socket, uniqueId}) => {
+const ChatFooter = ({ roomDetails, socket }) => {
   const [message, setMessage] = useState('');
-  const username = localStorage.getItem(uniqueId);
+  const username = localStorage.getItem('username');
 
-  const handleTyping = () => 
-      socket.emit('typing', `${username} is typing...`);
+  const handleTyping = () => {
+      socket.emit('typing', `${roomDetails.selectedName} is typing...`);
+  }
 
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (message.trim() && username) {
       socket.emit('message', {
         text: message,
-        name: username,
-        id: `${socket.id}${Math.random()}`,
-        socketID: socket.id,
+        username: username,
+        roomDetails: roomDetails,
+        id: `${socket.id}${Math.random()}`
       });
     }
     setMessage('');
   };
+  
   return (
     <div className="chat__footer"> 
-      <form className="form" onSubmit={handleSendMessage}>
+      <form className="form">
         <input
           type="text"
           placeholder="Write message"
@@ -30,7 +32,7 @@ const ChatFooter = ({ socket, uniqueId}) => {
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleTyping}
         />
-        <button className="sendBtn">SEND</button>
+        <button onClick={(e) => handleSendMessage(e)} className="sendBtn">SEND</button>
       </form>
     </div>
   );

@@ -2,7 +2,6 @@ import RedirectToLoginPage from "./RedirectToLoginPage";
 
 const Account = () => {
     const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
-    console.log(isAuthenticated)
     return(
         <div>
             {isAuthenticated? (

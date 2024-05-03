@@ -2,7 +2,6 @@ package e2000575.vamk.fi.server.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,12 +40,13 @@ public class BookingService {
     }
     
     public BookingForm createAppointment(String username, BookingForm receivedForm) {
-        for (BookingForm form : getAppointmentByUsername(username)) {
-            if(!form.getHospital().equals(receivedForm.getHospital()) && !form.getDate().equals(receivedForm.getDate())) {
-                appointment = receivedForm;
-            }
-        }
-        return appointment;
+        // for (BookingForm form : getAppointmentByUsername(username)) {
+        //     if(!form.getHospital().equals(receivedForm.getHospital()) && !form.getDate().equals(receivedForm.getDate())) {
+        //         appointment = receivedForm;
+        //     }
+        // }
+        bookingRepository.save(receivedForm);
+        return receivedForm;
     }
 
     public BookingForm updateAppointmentById (String username, String id, BookingForm receivedForm) {

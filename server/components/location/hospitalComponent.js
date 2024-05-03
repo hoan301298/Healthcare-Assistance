@@ -1,4 +1,5 @@
 const axios = require('axios');
+require('dotenv').config();
 const hospitalRequest = require('./hospitalRequest');
 
 const APIKEY = process.env.API_KEY;
@@ -10,7 +11,7 @@ const hospitalController = async (req, res) => {
         const response = await axios.get(GeocodeURL, {
             params: {
                 address: address,
-                key: APIKey
+                key: APIKEY
             }
         });
         const location = response.data.results[0].geometry.location;

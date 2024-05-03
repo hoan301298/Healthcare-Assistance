@@ -1,11 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const ChatBody = ({ messages, uniqueId, typingStatus, lastMessageRef }) => {
+const ChatBody = ({ roomDetails, messages, typingStatus, lastMessageRef }) => {
     const navigate = useNavigate();
-    const username = localStorage.getItem(uniqueId);
+
     const handleLeaveChat = () => {
-        localStorage.removeItem('userName');
         navigate('/');
         window.location.reload();
     };
@@ -13,7 +12,7 @@ const ChatBody = ({ messages, uniqueId, typingStatus, lastMessageRef }) => {
     return (
         <div className='chat__layout'>
             <header className="chat__mainHeader">
-                <p>Hangout with Colleagues</p>
+                <p>Room ID: {roomDetails.roomID} Title: {roomDetails.title}</p>
                 <button className="leaveChat__btn" onClick={handleLeaveChat}>
                 LEAVE CHAT
                 </button>
@@ -22,7 +21,8 @@ const ChatBody = ({ messages, uniqueId, typingStatus, lastMessageRef }) => {
             {/*This shows messages sent from you*/}
             <div className="message__container">
                 {messages.map((message) =>
-                    message.name === username ? (
+                    message.roomDetails.roomID === roomDetails.roomID && (
+                    message.roomDetails.selectedName === roomDetails.selectedName ? (
                         <div className="message__chats" key={message.id}>
                             <p className="sender__name">You</p>
                             <div className="message__sender">
@@ -31,12 +31,12 @@ const ChatBody = ({ messages, uniqueId, typingStatus, lastMessageRef }) => {
                         </div>
                     ) : (
                         <div className="message__chats" key={message.id}>
-                            <p>{message.name}</p>
+                            <p>{message.roomDetails.selectedName}</p>
                             <div className="message__recipient">
                                 <p>{message.text}</p>
                             </div>
                         </div>
-                    )
+                    ))
                 )}
                 
                 {/*This is triggered when a user is typing*/}

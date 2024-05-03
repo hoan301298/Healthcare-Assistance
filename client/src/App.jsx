@@ -5,9 +5,9 @@ import axios from 'axios';
 import Home from './components/home_page/Home';
 import Register from './components/account_service/Register';
 import Login from './components/account_service/Login';
-import MapComponent from './components/map/MapComponent';
+import SearchService from './components/map/SearchService';
 import Navbar from './components/Navbar';
-import { Contact } from './components/chat/Contact';
+import Contact from './components/chat/Contact';
 import ChatPage from './components/chat/ChatPage';
 import Booking from './components/appointment/Booking';
 import Account from './components/account_service/Account';
@@ -29,7 +29,6 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(token);
         if(token === null) {
           throw new Error('No token found!')  
         }
@@ -44,6 +43,8 @@ function App() {
         }
         setData(response.data);
         setIsAuthenticated(true);
+        console.log(data);
+        console.log(isAuthenticated);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -57,17 +58,19 @@ function App() {
       localStorage.removeItem('selectedHospital');
       localStorage.removeItem('username');
       localStorage.removeItem('alertMessage');
-    }, 5 * 60 * 1000);
+    }, 10 * 60 * 1000);
 
-  }, [updateToken, token, isAuthenticated]);
+  }, [updateToken]);
+
+  
   
   return (
-    <>
+    <div>
       <Navbar />
       <div className='container'>
         <Routes>
           <Route path='/' element={<Home />}/>
-          <Route path='/map' element={<MapComponent />}/>
+          <Route path='/map' element={<SearchService />}/>
           <Route path='/contact' element={<Contact />}/>
           <Route path='/chat' element={<ChatPage />}/>
           <Route path='/appointment' element={<Booking />}/>
@@ -76,7 +79,7 @@ function App() {
           <Route path='/account' element={<Account />}/>
         </Routes>
       </div>
-    </>
+    </div>
   );
 }
 
