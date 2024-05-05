@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MapComponent from './MapComponent';
 import HospitalList from './HospitalList';
-import '../../css/map.css';
+import '../../css/Map.css';
 import axios from 'axios';
 
 const APIKEY = process.env.REACT_APP_API_KEY;

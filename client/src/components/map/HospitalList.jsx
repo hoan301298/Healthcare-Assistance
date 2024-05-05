@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import RedirectToLoginPage from '../account_service/RedirectToLoginPage';
+import RedirectToLoginPage from '../account_service/action/RedirectToLoginPage';
 
 
 const HospitalList = ({ hospitals }) => {

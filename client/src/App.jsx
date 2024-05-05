@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 import Home from './components/home_page/Home';
@@ -12,15 +12,16 @@ import ChatPage from './components/chat/ChatPage';
 import Booking from './components/appointment/Booking';
 import Account from './components/account_service/Account';
 
-import './css/navbar.css';
-import './css/chat.css';
-import '././css/form.css'
+import './css/Navbar.css';
+import './css/Chat.css';
+import '././css/Form.css'
 
 function App() {
   const [data, setData] = useState(null);
   const [token, setToken] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState(null);
+  const location = useLocation();
   
   const updateToken = (newToken) => {
     setToken(newToken);
@@ -61,8 +62,6 @@ function App() {
     }, 10 * 60 * 1000);
 
   }, [updateToken]);
-
-  
   
   return (
     <div>

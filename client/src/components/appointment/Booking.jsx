@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import RedirectToLoginPage from '../account_service/RedirectToLoginPage';
+import RedirectToLoginPage from '../account_service/action/RedirectToLoginPage';
 
 const Booking = () => {
 

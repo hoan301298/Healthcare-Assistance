@@ -1,5 +1,5 @@
 import socketIO from 'socket.io-client';
-import RedirectToLoginPage from '../account_service/RedirectToLoginPage';
+import RedirectToLoginPage from '../account_service/action/RedirectToLoginPage';
 import { RoomDetails } from './RoomDetails';
 
 const Contact = () => {

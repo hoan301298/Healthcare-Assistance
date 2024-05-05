@@ -13,8 +13,7 @@ body {
     align-items: center;
     gap: 2rem;
     padding: 1rem;
-    height: 7vh;
-    border-bottom: 2px solid gray;
+    height: 10vh;
     position: static;
     top: 0;
     width: 100%;

@@ -1,6 +1,5 @@
 const MessageDetail = require('../model/ChatText');
 
-
 const chatComponent = (io) => {
 
     let rooms = new Array();
@@ -39,17 +38,15 @@ const chatComponent = (io) => {
         })
 
         socket.on('message', async (data) => {
-            
-            console.log(socket.roomID);
             io.emit('messageResponse', data);
-            // const messgae = new MessageDetail({
-            //     room_id: socket.roomID,
-            //     title: socket.title,
-            //     sender: data.username,
-            //     selected_name: socket.selectedName,
-            //     content: data.text
-            // });
-            // await messgae.save();
+            const messgae = new MessageDetail({
+                room_id: data.roomDetails.roomID,
+                username: data.username,
+                title: data.roomDetails.title,
+                sender: data.roomDetails.selectedName,
+                content: data.text
+            });
+            await messgae.save();
         });
 
         socket.on('typing', (data) => {

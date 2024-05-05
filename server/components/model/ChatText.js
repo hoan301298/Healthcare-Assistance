@@ -2,14 +2,17 @@ const { Schema, model } = require('mongoose');
 const CryptoJS = require('crypto-js');
 
 const messageSchema = new Schema({
+    room_id: {type: Number, required: true},
+    username: {type: String, required: true},
+    title: {type: String, required: true},
     sender: {type: String, required: true},
     content: {type: String, required: true},
-    timestamp: {type: Date, default: Date.now}
+    sentAt: {type: Date, default: Date.now}
 });
 
 messageSchema.pre('save', function(next) {
     const message = this;
-    const encryptedContent = CryptoJS.AES.encrypt(message.content, 'your_secret_key').toString();
+    const encryptedContent = CryptoJS.AES.encrypt(message.content, 'XXX').toString();
     message.content = encryptedContent;
     next();
 });
