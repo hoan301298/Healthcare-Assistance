@@ -2,7 +2,7 @@ const axios = require('axios');
 require('dotenv').config();
 const hospitalRequest = require('./hospitalRequest');
 
-const APIKEY = process.env.API_KEY;
+const APIKEY = process.env.GOOGLE_MAP_API_KEY;
 const GeocodeURL = 'https://maps.googleapis.com/maps/api/geocode/json';
 
 const hospitalController = async (req, res) => {

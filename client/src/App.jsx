@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 
 import Home from './components/home_page/Home';
@@ -17,45 +17,40 @@ import './css/Chat.css';
 import '././css/Form.css'
 
 function App() {
-  const [data, setData] = useState(null);
-  const [token, setToken] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState(null);
-  const location = useLocation();
+  const [token, setToken] = useState(localStorage.getItem('accessToken'));
   
   const updateToken = (newToken) => {
     setToken(newToken);
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const authorization = async () =>{
+    if(token === null) {
+      localStorage.setItem('isAuthenticated', false);
+      localStorage.setItem('username', null);
+    } else {
       try {
-        if(token === null) {
-          throw new Error('No token found!')  
-        }
-
         const response = await axios.get('/authenticated', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
         });
-        if(!response.status == 200) {
+        if(!response.status === 200) {
           throw new Error('Failed to fetch data')
+        } else {
+          localStorage.setItem('isAuthenticated', true)
         }
-        setData(response.data);
-        setIsAuthenticated(true);
-        console.log(data);
-        console.log(isAuthenticated);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
-    };
-    fetchData();
+    }
+  }
+
+  useEffect(() => {
+    authorization();
     setTimeout(() => {
-      localStorage.removeItem('accessToken');
       setToken(null);
-      setIsAuthenticated(false);
-      localStorage.setItem('isAuthenticated', isAuthenticated);
+      localStorage.removeItem('accessToken');
+      localStorage.setItem('isAuthenticated', false);
       localStorage.removeItem('selectedHospital');
       localStorage.removeItem('username');
       localStorage.removeItem('alertMessage');

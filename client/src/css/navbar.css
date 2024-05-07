@@ -14,7 +14,7 @@ body {
     gap: 2rem;
     padding: 1rem;
     height: 10vh;
-    position: static;
+    position:sticky;
     top: 0;
     width: 100%;
 }
@@ -67,7 +67,6 @@ body {
 
 .nav li:active {
     background-color: #777;
-    
 }
 
 .lgn-sgp Button {

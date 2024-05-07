@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const ShowAppointment = ({username}) => {
+const ShowAppointment = (username) => {
     const [appointments, setAppointments] = useState([]);
 
     const getAllAppointment = async () => {
@@ -15,17 +15,20 @@ const ShowAppointment = ({username}) => {
     
     useEffect(() => {
         getAllAppointment();
-    }, [])
-
+    }, [username])
+    console.log(appointments.length)
     return (
         <div className="appointment-list">
             <h1>Your Appointments:</h1>
-            <ul>
+            {appointments.map((appointment, index) => (
+                <li key={index}>{appointment.patientName}</li>
+            ))}
+            {/* <ul>
                 {appointments && (
                     appointments.map((appointment, index) => {
                         return (
                             <li key={index + 1}>
-                                <h2>{index}</h2>
+                                <h2>{index + 1}</h2>
                                 Patient Name: {appointment.patient_name}
                                 Email: {appointment.email}
                                 Phone: {appointment.phone}
@@ -40,7 +43,7 @@ const ShowAppointment = ({username}) => {
                             </li>
                         )
                 }))}    
-            </ul>
+            </ul> */}
         </div>
     )
 }

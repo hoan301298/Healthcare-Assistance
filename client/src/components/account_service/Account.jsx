@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import RedirectToLoginPage from "./action/RedirectToLoginPage";
 import Sidebar from "./action/Sidebar";
 import ShowAppointment from "./action/ShowAppointment";
@@ -8,13 +8,9 @@ import '../../css/Account.css';
 
 const Account = () => {
     const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
-    const [username, setUsername] = useState('');
     const [pageCode, setPageCode] = useState(0);
     // Page Code setting: Profile(0), Appointment(1), Reset Password(2)
-    
-    useEffect(() => {
-        setUsername(localStorage.getItem('username'));
-    }, [username])
+    const username = localStorage.getItem('username');
 
     const updatePageCode = (code) => {
         setPageCode(code);

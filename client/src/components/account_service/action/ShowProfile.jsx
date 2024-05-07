@@ -52,10 +52,10 @@ const ShowProfile = ({username}) => {
             <br />
             <h1>Edit your profile</h1>
             <form onSubmit={handleSubmit}>
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email" /> <br/>
-                <input type="text" value={phone} maxLength={15} onChange={e => setPhone(e.target.value)} placeholder="Enter your phone" /> <br/>
-                <input type="number" value={age} maxLength={3} onChange={e => setAge(e.target.value)} placeholder="Enter your age" /> <br/>
-                Confirm password: <input type="password" value={password} onChange={e => setPassword(e.target.value)} /> <br />
+                <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email" required/> <br/>
+                <input type="text" value={phone} maxLength={15} onChange={e => setPhone(e.target.value)} placeholder="Enter your phone" required/> <br/>
+                <input type="number" value={age} maxLength={3} onChange={e => setAge(e.target.value)} placeholder="Enter your age" required/> <br/>
+                Confirm password: <input type="password" value={password} onChange={e => setPassword(e.target.value)} required/> <br />
                 <button type="submit">Save</button>
             </form>
             {responseData}

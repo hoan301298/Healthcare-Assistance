@@ -4,7 +4,7 @@ import HospitalList from './HospitalList';
 import '../../css/Map.css';
 import axios from 'axios';
 
-const APIKEY = process.env.REACT_APP_API_KEY;
+const APIKEY = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
 
 const SearchService = () => {
   
@@ -33,7 +33,7 @@ const SearchService = () => {
           <input type="text" placeholder='Write your location' value={address} onChange={(e) => setAddress(e.target.value)} required />
           <button type='submit'>Select</button>
         </form>
-        <p>-----------------------------------------------------------------------------</p>
+        <p>--------------------------------------------------------------</p>
         {hospitals && <HospitalList hospitals={hospitals}/>}  
       </div>
     </div>

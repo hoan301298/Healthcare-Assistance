@@ -1,6 +1,10 @@
+.geolocation-service {
+    background-position: center;
+}
+
 .map {
     margin: auto;
-    margin-top: 5vh;
+    padding: 10px;
     height: 50vh;
     width: 80vh;
 }

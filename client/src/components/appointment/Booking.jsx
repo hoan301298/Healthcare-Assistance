@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import RedirectToLoginPage from '../account_service/action/RedirectToLoginPage';
+import { BookingAppointment, SendEmail } from './Service';
+import axios from 'axios';
 
 const Booking = () => {
 
@@ -9,22 +10,27 @@ const Booking = () => {
     const [Time, setTime] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [data, setData] = useState([]);
-    const [hospital, setHospital] = useState([]);
-    
+    const [hospital, setHospital] = useState({});
+    const [getBooking, setGetBooking] = useState({});
+    const [bookingSuccess, setBookingSuccess] = useState(false);
     const selectedHospital = JSON.parse(localStorage.getItem('selectedHospital'));
     const username = localStorage.getItem('username');
     const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
-
+    
+    useEffect(() => {
+        if(selectedHospital) {
+            setHospital({
+                id: selectedHospital.information.place_id,
+                name: selectedHospital.name,
+                address: selectedHospital.information.details.formatted_address,
+                phone: selectedHospital.information.details.formatted_phone_number,
+                website: selectedHospital.information.details.website
+            })    
+        }
+    }, [])
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setHospital({
-            id: selectedHospital.information.place_id,
-            name: selectedHospital.name,
-            address: selectedHospital.information.details.formatted_address,
-            phone: selectedHospital.information.details.formatted_phone_number,
-            website: selectedHospital.information.details.website
-        })
         
         const bookingForm = {
             username: username,
@@ -36,16 +42,22 @@ const Booking = () => {
             time: Time,
         }
         try {
-            const response = await axios.post(`http://localhost:8080/booking-form/create/${username}`, bookingForm);
-            console.log('Booking created:', response.data);
-            setData(JSON.stringify(response.data));
-            // localStorage.setItem('selectedHospital', null);
-            // Optionally, add logic to redirect or show success message
-        } catch (error) {
-            console.error('Error creating booking:', error);
+            const appointment = await axios.post(`http://localhost:8080/booking-form/create/${bookingForm.username}`, bookingForm)
+            setGetBooking(appointment.data);
+            setBookingSuccess(true);
+        } catch (e) {
+            console.log(e);
         }
     };
-
+    
+    const handleSendEmail = async () => {
+        try {
+            const response = await axios.post('/send-email', getBooking);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
         <div className='appointment'>
             {isAuthenticated && selectedHospital !== null ? (
@@ -53,15 +65,18 @@ const Booking = () => {
                     <h3>Hospital details: {selectedHospital.name}</h3> <br />
                     Phone Number: {selectedHospital.information.details.formatted_phone_number} <br />
                     Address: {selectedHospital.information.details.formatted_address}
-                    <form className='booking-form' onSubmit={handleSubmit}>
+                    <form className='booking-form'>
                         <input type="text" value={patientName} onChange={(e) => setPatientName(e.target.value)} placeholder="Patient Name" required />
                         <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
                         <input type="number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} placeholder="Phone Number" required />
                         <input type="date" value={Date} onChange={(e) => setDate(e.target.value)} required />
                         <input type="time" value={Time} onChange={(e) => setTime(e.target.value)} required /><br />
-                        <button type="submit">Book Appointment</button>
+                        <button onClick={e => handleSubmit(e)}>Book Appointment</button>
+                        {bookingSuccess && 
+                            <button onClick={handleSendEmail}>Send Email</button>
+                        }
                     </form>
-                    {data}
+                    
                 </div>
             ) : (
                 <div>
