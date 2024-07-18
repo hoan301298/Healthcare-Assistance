@@ -19,7 +19,7 @@ const sendEmail = async (req, res) => {
         from: 'mailtrap@demomailtrap.com',
         to: 'hoantran301298@gmail.com',
         subject: 'Reservation Successfully',
-        html: `<h5>Reservation Id: ${selectedAppointment.id}</h5>
+        html:  `<h5>Reservation Id: ${selectedAppointment.id}</h5>
                 <p>Patient Name: ${selectedAppointment.patientName}</p>
                 <p>Email: ${selectedAppointment.email}</p>
                 <p>Phone: ${selectedAppointment.phone}</p>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Register = ({ updateToken }) => {
@@ -7,8 +8,9 @@ const Register = ({ updateToken }) => {
     const [password, setPassword] = useState('');
     const [phone, setPhone] = useState('');
     const [age, setAge] = useState('');
-    const [token, setToken] = useState(null);
+    const [token, setToken] = useState(null);  
     const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    const navigate = new useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,7 +28,7 @@ const Register = ({ updateToken }) => {
                 localStorage.setItem('accessToken', token);
                 localStorage.setItem('isAuthenticated', true);
                 localStorage.setItem('username', username);
-                window.location.href = localStorage.getItem('backToPage') || '/account';
+                navigate(localStorage.getItem('backToPage') || '/account');
             })
             .catch((error) => {
                 alert('Invalid username or password. Please try again.')
@@ -34,15 +36,14 @@ const Register = ({ updateToken }) => {
         })
         alert('Invalid username or password!')
     };
-
     const handleLoginClick = () => {
-        window.location.href = '/login'
+        navigate('/login');
     }
 
     return (
         <div>
             {isAuthenticated? (
-                window.location.href = '/account'
+                navigate(localStorage.getItem('backToPage') || '/account')
             ) : (
                 
                 <div className='register'>

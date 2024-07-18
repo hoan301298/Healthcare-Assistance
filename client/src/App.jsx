@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 
-import Home from './components/home_page/Home';
+import Home from './components/home/Home';
 import Register from './components/account_service/Register';
 import Login from './components/account_service/Login';
-import SearchService from './components/map/SearchService';
+import SearchService from './components/search/SearchService';
 import Navbar from './components/Navbar';
 import Contact from './components/chat/Contact';
 import ChatPage from './components/chat/ChatPage';
@@ -14,7 +14,8 @@ import Account from './components/account_service/Account';
 
 import './css/Navbar.css';
 import './css/Chat.css';
-import '././css/Form.css'
+import '././css/Form.css';
+import '././css/App.css'
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('accessToken'));
@@ -56,10 +57,10 @@ function App() {
       localStorage.removeItem('alertMessage');
     }, 10 * 60 * 1000);
 
-  }, [updateToken]);
+  }, [updateToken, token]);
   
   return (
-    <div>
+    <div className='banner'>
       <Navbar />
       <div className='container'>
         <Routes>

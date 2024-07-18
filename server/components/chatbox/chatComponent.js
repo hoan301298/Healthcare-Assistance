@@ -38,7 +38,6 @@ const chatComponent = (io) => {
         })
 
         socket.on('message', async (data) => {
-            io.emit('messageResponse', data);
             const messgae = new MessageDetail({
                 room_id: data.roomDetails.roomID,
                 username: data.username,
@@ -47,6 +46,7 @@ const chatComponent = (io) => {
                 content: data.text
             });
             await messgae.save();
+            io.emit('messageResponse', data);
         });
 
         socket.on('typing', (data) => {

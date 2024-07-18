@@ -16,7 +16,7 @@ const ShowAppointment = (username) => {
     useEffect(() => {
         getAllAppointment();
     }, [username])
-    console.log(appointments.length)
+
     return (
         <div className="appointment-list">
             <h1>Your Appointments:</h1>

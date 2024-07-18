@@ -12,7 +12,7 @@ const ChatBody = ({ roomDetails, messages, typingStatus, lastMessageRef }) => {
     return (
         <div className='chat__layout'>
             <header className="chat__mainHeader">
-                <p>Room ID: {roomDetails.roomID} Title: {roomDetails.title}</p>
+                <p>Room ID: {roomDetails.roomID} ---------- Title: {roomDetails.title}</p>
                 <button className="leaveChat__btn" onClick={handleLeaveChat}>
                 LEAVE CHAT
                 </button>

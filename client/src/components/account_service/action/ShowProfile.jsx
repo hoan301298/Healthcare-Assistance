@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { getProfile, updateProfile } from "./Profile";
 
 const ShowProfile = ({username}) => {
-
     const [userDetails, setUserDetails] = useState({});
     const [email, setEmail] = useState(null);
     const [phone, setPhone] = useState(null);

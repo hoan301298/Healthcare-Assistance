@@ -16,7 +16,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookingForm {
-
     @Id
     private String id;
     private String username;

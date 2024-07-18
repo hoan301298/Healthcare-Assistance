@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import RedirectToLoginPage from '../account_service/action/RedirectToLoginPage';
 import { BookingAppointment, SendEmail } from './Service';
-import axios from 'axios';
 
 const Booking = () => {
 
@@ -42,8 +41,8 @@ const Booking = () => {
             time: Time,
         }
         try {
-            const appointment = await axios.post(`http://localhost:8080/booking-form/create/${bookingForm.username}`, bookingForm)
-            setGetBooking(appointment.data);
+            const appointment = await BookingAppointment(bookingForm);
+            setGetBooking(appointment);
             setBookingSuccess(true);
         } catch (e) {
             console.log(e);
@@ -52,7 +51,7 @@ const Booking = () => {
     
     const handleSendEmail = async () => {
         try {
-            const response = await axios.post('/send-email', getBooking);
+            const response = await SendEmail(getBooking);
             console.log(response);
         } catch (error) {
             console.log(error);

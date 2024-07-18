@@ -7,10 +7,10 @@ const morgan = require('morgan');
 const chatComponent = require('./components/chatbox/chatComponent');
 const db_connection = require('./components/mongo/db_connect');
 require('dotenv').config();
-const PORT = 5000;
-
 const app = express();
 const http = require('http').createServer(app);
+const PORT = 5000;
+
 app.use(express.json());
 app.use(cors());
 app.use('/', routes);
@@ -19,7 +19,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 db_connection();
-
 const io = socketIO(http, {
   cors: {
       origin: "http://localhost:3000"

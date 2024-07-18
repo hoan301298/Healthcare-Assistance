@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = ({ updateToken }) => {
@@ -6,6 +7,8 @@ const Login = ({ updateToken }) => {
   const [password, setPassword] = useState('');
   const [alertMessage, setAlertMessage] = useState(null);
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+
+  const navigate = new useNavigate();
 
   useEffect(() => {
     setAlertMessage(localStorage.getItem('alertMessage'));
@@ -34,14 +37,14 @@ const Login = ({ updateToken }) => {
   };
 
   const handleRegisterClick = () => {
-    window.location.href = '/sign-up';
+    navigate('/sign-up');
   }
 
   return (
 
     <div className='login'>
       {isAuthenticated? (
-        window.location.href = (localStorage.getItem('backToPage') || '/account')
+        navigate(localStorage.getItem('backToPage') || '/account')
         ) : (
         <div>
           {alertMessage != null && (<p className='alert-message'>{alertMessage}</p>)}

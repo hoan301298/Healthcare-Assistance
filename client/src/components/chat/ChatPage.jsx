@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import ChatBody from './ChatBody';
 import ChatFooter from './ChatFooter';
-import { userKey, socket }  from './RoomDetails';
+import { socket }  from './RoomDetails';
 
 const ChatPage = () => {
     const [messages, setMessages] = useState([]);
@@ -15,7 +15,6 @@ const ChatPage = () => {
         socket.on('messageResponse', (data) => setMessages([...messages, data]));
         console.log(messages)
     }, [socket, location, messages]);
-
     useEffect(() => {
         socket.on('roomDetails', (data) => {
             setRoomDetails({
@@ -25,7 +24,6 @@ const ChatPage = () => {
             })
         });
     }, []);
-
     useEffect(() => {
         socket.on('typingResponse', (data) => setTypingStatus(data));
     }, [socket]);

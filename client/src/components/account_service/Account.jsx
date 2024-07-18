@@ -11,15 +11,12 @@ const Account = () => {
     const [pageCode, setPageCode] = useState(0);
     // Page Code setting: Profile(0), Appointment(1), Reset Password(2)
     const username = localStorage.getItem('username');
-
     const updatePageCode = (code) => {
         setPageCode(code);
     }
-
     if(!isAuthenticated) {
         return <RedirectToLoginPage pathname={window.location.pathname} alertMessage={'Please login to view your profile!'}/>
     }
-
     return  (
         <div className="account">
             <div className="side-bar">

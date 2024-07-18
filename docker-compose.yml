@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  react-frontend:
+    image: react-frontend
+    build:
+      context: ./client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - node-backend
+
+  node-backend:
+    image: node-backend
+    build:
+      context: ./server
+    ports:
+      - "5000:5000"
+    depends_on:
+      - spring-boot-backend
+      - mongo
+    environment:
+      - NODE_ENV=production
+      - API_URL=http://spring-boot-backend:8080
+      - MONGO_URL=mongodb://mongo:27017/thesisDB
+
+  spring-boot-backend:
+    image: spring-boot-backend
+    build:
+      context: ./booking-server
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - MONGO_URL=mongodb://mongo:27017/thesisDB
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
