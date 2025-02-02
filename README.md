@@ -24,9 +24,9 @@ A full-stack web application providing healthcare assistance, appointment bookin
 ## 🎯 Installation & Setup
 
 ### Clone project from GitHub repository
-    ```sh
-    git clone https://github.com/hoan301298/Healthcare-Assistance.git
-    ```
+```sh
+git clone https://github.com/hoan301298/Healthcare-Assistance.git
+```
 
 ### Prerequisites
 Ensure you have the following installed:
