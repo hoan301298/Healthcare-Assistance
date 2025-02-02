@@ -36,14 +36,17 @@ Ensure you have the following installed:
 
 ### Backend Setup (Spring Boot + Node.js)
 ```sh
-# Navigate to backend directory
-cd backend
+# Navigate to server directory
+cd server
 
 # Install dependencies (Node.js part)
 npm install
 
 # Start Node.js API Gateway
 npm start
+
+# Navigate to booking-server directory from root
+cd booking-server
 
 # Install Spring Boot dependencies (Spring Boot part)
 mvn clean install
@@ -55,7 +58,7 @@ mvn spring-boot:run
 ### Frontend Setup (React.js)
 ```sh
 # Navigate to frontend directory
-cd frontend
+cd client
 
 # Install dependencies
 npm install
