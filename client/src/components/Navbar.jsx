@@ -2,6 +2,13 @@ import Logo from '../assets/BK lie.jpg';
 import { Link } from 'react-router-dom';
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
 
+export const navLinks = [
+    {id: 1, path: "/", element: "Home"},
+    {id: 2, path: "/map", element: "Search"},
+    {id: 3, path: "/appointment", element: "Appointment"},
+    {id: 4, path: "/contact", element: "Contact"},
+]
+
 const Navbar = () => {
     return (
         <nav className='nav'>
@@ -10,13 +17,22 @@ const Navbar = () => {
                     <img src={Logo} />
                 </Link>
             </div>
-            <div className='site-pages'>
-                <ul>
-                    <Link to="/">Home</Link>
-                    <a href='/map'>Search</a>
-                    <Link to="/appointment">Appointment</Link>
-                    <Link to="/contact">Contact</Link>
-                </ul>
+            <div className='site-pages' 
+                style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "5vw"
+                }}
+            >
+                {navLinks.map((navLink) => (
+                    <Button
+                        key={navLink.id}
+                        as={Link}
+                        to={navLink.path}
+                    >
+                        {navLink.element}
+                    </Button>
+                ))}
             </div>
             <div className='lgn-sgp'>
                 <Dropdown>

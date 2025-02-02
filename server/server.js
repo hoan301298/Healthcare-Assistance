@@ -5,7 +5,7 @@ const socketIO = require('socket.io');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const chatComponent = require('./components/chatbox/chatComponent');
-const db_connection = require('./components/mongo/db_connect');
+const { mongoConnect, mongoDisconnect} = require('./components/mongo/db_connect');
 require('dotenv').config();
 const app = express();
 const http = require('http').createServer(app);
@@ -18,7 +18,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-db_connection();
+mongoConnect();
 const io = socketIO(http, {
   cors: {
       origin: "http://localhost:3000"

@@ -1,19 +1,28 @@
 const mongoose = require('mongoose');
+const Mongo_URL = process.env.MONGO_URL;
 
-const connectDatabase = () => {
-    mongoose.connect('mongodb://localhost:27017/healthcare-assistance');
-    
-    const db = mongoose.connection;
-    db.on('error', (error) => {
-        console.log(error)
-    })
-    
-    db.once('open', () => {
-        console.log('Database Connection Established!')
-    })
-    
-}
+mongoose.connection.once('open', () => {
+    console.log('MongoDB connection ready!');
+});
 
-module.exports = connectDatabase;
+mongoose.connection.on('error', (err) => {
+    console.error(err);
+});
+
+async function mongoConnect() {
+    await mongoose.connect(Mongo_URL, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+};
+
+async function mongoDisconnect() {
+    await mongoose.disconnect();
+};
+
+module.exports = {
+    mongoConnect,
+    mongoDisconnect
+};
 
 

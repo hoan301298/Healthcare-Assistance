@@ -9,23 +9,26 @@ const MapComponent = ({ APIKEY, hospitals, address }) => {
     const [defaultProps, setDefaultProps] = useState({});
     
     useEffect(() => {
-        const storedDefaultProps = localStorage.getItem('defaultLocationValue');
-        if(storedDefaultProps) {
-            setDefaultProps(JSON.parse(storedDefaultProps))
-        }
         const fetchGeoCode = async () => {
-            await axios.get(GeocodeURL, {
-                params: {
-                    address: address,
-                    key: APIKEY
-                }
-            })
-            .then(response => setDefaultProps({
-                center: response.data.results[0].geometry.location,
-                zoom: 13
-            }))
-            .catch(error => console.error('Error fetching geocode', error))
-        }
+            try {
+                const location = address && address.trim() !== "" ? address : "Finland"; // Default to Finland if address is null or empty
+
+                const response = await axios.get(GeocodeURL, {
+                    params: {
+                        address: location,
+                        key: APIKEY,
+                    },
+                });
+
+                setDefaultProps({
+                    center: response.data.results[0].geometry.location,
+                    zoom: address==""? 8 : 13,
+                });
+
+            } catch (error) {
+                console.error("Error fetching geocode", error);
+            }
+        };
         fetchGeoCode();
     }, [address])
 
